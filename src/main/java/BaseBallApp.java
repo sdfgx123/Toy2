@@ -4,6 +4,7 @@ import dao.TeamDAO;
 import db.DBConnection;
 import model.Account;
 import model.Stadium;
+import model.Team;
 
 import java.sql.Connection;
 import java.util.List;
@@ -23,6 +24,9 @@ public class BaseBallApp {
 
         List<Stadium> stadiumList = stadiumDAO.getStadiumList();
         System.out.println(stadiumList.toString());
+
+        List<Team> teamList = teamDAO.getTeamList();
+        System.out.println(teamList.toString());
 
 
 
