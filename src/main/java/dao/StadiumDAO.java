@@ -1,6 +1,13 @@
 package dao;
 
+import model.Stadium;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StadiumDAO {
 
@@ -20,5 +27,26 @@ public class StadiumDAO {
 
         List<Stadium> stadiumList = new ArrayList<>();
 
+        String query = "select * from stadium_tb";
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Stadium stadium = new Stadium(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getTimestamp("created_at")
+                );
+                stadiumList.add(stadium);
+            }
+            return stadiumList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stadiumList;
     }
 }
