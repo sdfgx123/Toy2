@@ -28,6 +28,10 @@ public class BaseBallApp {
         List<Team> teamList = teamDAO.getTeamList();
         System.out.println(teamList.toString());
 
+        System.out.println("-----registerStadium-----");
+        stadiumDAO.registerStadium("test-001");
+        System.out.println(stadiumList.toString());
+
 
 
     }

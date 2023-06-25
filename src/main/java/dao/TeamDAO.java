@@ -2,10 +2,7 @@ package dao;
 
 import model.Team;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +15,20 @@ public class TeamDAO {
     }
 
     // 팀 등록
-    public void registerTeam() {
+    public void registerTeam(String name) {
+        String query = "insert into team_tb (stadium_id, name) values (?, ?)";
 
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setNull(1, Types.INTEGER);
+            statement.setString(2, name);
+
+            int result = statement.executeUpdate();
+            System.out.println("registerTeam res : " + result);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // 전체 팀 목록
