@@ -15,7 +15,7 @@ public class TeamDAO {
 
     }
 
-    // 팀 목록
+    // 전체 팀 목록
     public void getTeamList() {
 
     }

@@ -10,13 +10,15 @@ public class StadiumDAO {
         this.connection = connection;
     }
 
-    // 경기장 등록
+    // 야구장 등록
     public void registerStadium() {
 
     }
 
-    // 경기장 목록
-    public void getStadiumList() {
+    // 전체 야구장 목록 보기
+    public List<Stadium> getStadiumList() {
+
+        List<Stadium> stadiumList = new ArrayList<>();
 
     }
 }
