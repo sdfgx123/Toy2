@@ -9,7 +9,7 @@ public class DBConnection {
 
         String url = "jdbc:mysql://localhost:3306/metadb";
         String username = "root";
-        String password = "arm8030net**17";
+        String password = "password";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
