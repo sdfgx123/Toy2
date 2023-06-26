@@ -4,24 +4,24 @@ import java.sql.Timestamp;
 
 public class OutPlayer {
     private int id;
-    private int player_id;
+    private int playerId;
     private String reason;
-    private Timestamp create_at;
+    private Timestamp createdAt;
 
-    public OutPlayer(int id, int player_id, String reason, Timestamp create_at) {
+    public OutPlayer(int id, int playerId, String reason, Timestamp createdAt) {
         this.id = id;
-        this.player_id = player_id;
+        this.playerId = playerId;
         this.reason = reason;
-        this.create_at = create_at;
+        this.createdAt = createdAt;
     }
 
     @Override
     public String toString() {
         return "OutPlayer{" +
                 "id=" + id +
-                ", player_id=" + player_id +
+                ", playerId=" + playerId +
                 ", reason='" + reason + '\'' +
-                ", create_at=" + create_at +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
