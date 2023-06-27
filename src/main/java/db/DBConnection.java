@@ -7,9 +7,9 @@ public class DBConnection {
 
     public static Connection getInstance() {
 
-        String url = "jdbc:mysql://localhost:3306/metadb";
+        String url = "jdbc:mysql://localhost:3306/baseball";
         String username = "root";
-        String password = "arm8030net**17";
+        String password = "root1234";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
