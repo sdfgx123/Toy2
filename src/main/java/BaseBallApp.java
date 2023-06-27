@@ -1,6 +1,4 @@
-import dao.AccountDAO;
-import dao.StadiumDAO;
-import dao.TeamDAO;
+import dao.*;
 import db.DBConnection;
 import model.Account;
 import model.Stadium;
@@ -15,23 +13,32 @@ public class BaseBallApp {
 
         Connection connection = DBConnection.getInstance();
 
-        AccountDAO accountDAO = new AccountDAO(connection);
-        StadiumDAO stadiumDAO = new StadiumDAO(connection);
-        TeamDAO teamDAO = new TeamDAO(connection);
+        PlayerDAO playerDAO = new PlayerDAO(connection);
 
-        List<Account> accountList = accountDAO.getAccountList();
-        System.out.println(accountList.toString());
+        playerDAO.registerPlayer(1, "오형석", "유격수");
 
-        List<Stadium> stadiumList = stadiumDAO.getStadiumList();
-        System.out.println(stadiumList.toString());
+        OutPlayerDAO outPlayerDAO = new OutPlayerDAO(connection);
+        outPlayerDAO.registerOutPlayer(20, "도박");
+        System.out.println(playerDAO.getPlayers(1));
+        System.out.println(outPlayerDAO.getOutPlayers());
 
-        List<Team> teamList = teamDAO.getTeamList();
-        System.out.println(teamList.toString());
-
-        System.out.println("-----registerStadium-----");
-        stadiumDAO.registerStadium("test-001");
-        System.out.println(stadiumList.toString());
-
+//
+//        AccountDAO accountDAO = new AccountDAO(connection);
+//        StadiumDAO stadiumDAO = new StadiumDAO(connection);
+//        TeamDAO teamDAO = new TeamDAO(connection);
+//
+//        List<Account> accountList = accountDAO.getAccountList();
+//        System.out.println(accountList.toString());
+//
+//        List<Stadium> stadiumList = stadiumDAO.getStadiumList();
+//        System.out.println(stadiumList.toString());
+//
+//        List<Team> teamList = teamDAO.getTeamList();
+//        System.out.println(teamList.toString());
+//
+//        System.out.println("-----registerStadium-----");
+//        stadiumDAO.registerStadium("test-001");
+//        System.out.println(stadiumList.toString());
 
 
     }
