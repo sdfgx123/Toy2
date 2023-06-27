@@ -35,7 +35,9 @@ public class TeamDAO {
     public List<Team> getTeamList() {
 
         List<Team> teamList = new ArrayList<>();
-        String query = "select * from team_tb";
+        String query = "select team_tb.*, stadium_tb.name as stadium_name, stadium_tb.created_at as stadium_created_at " +
+                "from team_tb " +
+                "left join stadium_tb on team_tb.stadium_id = stadium_tb.id";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
