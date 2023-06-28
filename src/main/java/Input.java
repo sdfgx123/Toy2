@@ -1,4 +1,5 @@
 import dto.InputDTO;
+import exception.InputEndException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,11 +12,18 @@ public class Input {
 
     public static InputDTO makeRequest() {
         while (true) {
-            System.out.println("어떤 기능을 요청하시겠습니까?");
-            String str = sc.next();
-            InputDTO pDTO = parseString(str);
-            return pDTO;
-            // 입력 예외처리 추가 필요
+            System.out.printf("어떤 기능을 요청하시겠습니까? 종료를 원하시면 end를 입력하십시오 : ");
+            try {
+                String str = sc.next();
+                if (str.equals("end")) {
+                    throw new InputEndException("end 입력 : 프로그램을 종료합니다.");
+                }
+                InputDTO pDTO = parseString(str);
+                return pDTO;
+            } catch (InputEndException e) {
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }
         }
     }
 

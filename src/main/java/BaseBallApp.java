@@ -38,9 +38,13 @@ public class BaseBallApp {
 //        stadiumDAO.registerStadium("test-001");
 //        System.out.println(stadiumList.toString());
 
-        InputDTO pDTO = Input.makeRequest();
-        callFunction(pDTO);
-
+        while (true) {
+            InputDTO pDTO = Input.makeRequest();
+            callFunction(pDTO);
+            System.out.println("-----------------------------------------------------");
+            System.out.println("요청에 대한 처리가 모두 끝났습니다. 기능 요청 콘솔을 다시 출력합니다.");
+            System.out.println("-----------------------------------------------------");
+        }
     }
 
     public static void callFunction(InputDTO pDTO) {
