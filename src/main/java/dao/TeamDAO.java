@@ -1,7 +1,6 @@
 package dao;
 
 import dto.TeamRespDTO;
-import model.Team;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,12 +9,19 @@ import java.util.List;
 public class TeamDAO {
 
     private Connection connection;
+    private static TeamDAO instance;
 
-    public TeamDAO(Connection connection) {
+    private TeamDAO(Connection connection) {
         this.connection = connection;
     }
 
-    // 팀 등록
+    public static TeamDAO getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new TeamDAO(connection);
+        }
+        return instance;
+    }
+
     public void registerTeam(String stadiumId, String name) {
         String query = "insert into team_tb (stadium_id, name) values (?, ?)";
 

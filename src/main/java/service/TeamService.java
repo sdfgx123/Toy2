@@ -11,7 +11,7 @@ import java.util.List;
 public class TeamService {
 
     static final Connection connection = DBConnection.getInstance();
-    static final TeamDAO teamDAO = new TeamDAO(connection);
+    static final TeamDAO teamDAO = TeamDAO.getInstance(connection);
 
     private static final TeamService instance = new TeamService();
 
