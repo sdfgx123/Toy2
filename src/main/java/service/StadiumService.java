@@ -11,7 +11,7 @@ import java.util.List;
 public class StadiumService {
 
     static final Connection connection = DBConnection.getInstance();
-    static final StadiumDAO stadiumDAO = new StadiumDAO(connection);
+    static final StadiumDAO stadiumDAO = StadiumDAO.getInstance(connection);
 
     private static final StadiumService instance = new StadiumService();
 

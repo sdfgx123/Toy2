@@ -12,9 +12,17 @@ import java.util.List;
 public class StadiumDAO {
 
     private Connection connection;
+    private static StadiumDAO instance;
 
-    public StadiumDAO(Connection connection) {
+    private StadiumDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public static StadiumDAO getInstance(Connection connection) {
+        if (instance == null) {
+            instance = new StadiumDAO(connection);
+        }
+        return instance;
     }
 
     // 야구장 등록
