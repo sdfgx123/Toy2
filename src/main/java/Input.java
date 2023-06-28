@@ -13,12 +13,12 @@ public class Input {
     static Scanner sc = new Scanner(System.in);
 
     public static InputDTO makeRequest() {
-        Pattern pattern = Pattern.compile("^\\w+\\?\\w+=.+(&\\w+=.+)*$");
+        Pattern pattern = Pattern.compile("^[\\p{L}\\p{N}]+(\\?[\\p{L}\\p{N}]+=.*(&[\\p{L}\\p{N}]+=.*)*)?$");
 
         while (true) {
             System.out.printf("어떤 기능을 요청하시겠습니까? 종료를 원하시면 end를 입력하십시오 : ");
             try {
-                String str = sc.next();
+                String str = sc.nextLine();
 
                 if (str.equals("end")) {
                     throw new InputEndException("end 입력 : 프로그램을 종료합니다.");
@@ -28,7 +28,9 @@ public class Input {
                 if (!matcher.matches()) {
                     throw new IllegalArgumentException("잘못된 형식입니다. 다시 입력하십시오.");
                 }
+
                 InputDTO pDTO = parseString(str);
+
                 return pDTO;
             } catch (InputEndException e) {
                 System.out.println(e.getMessage());
