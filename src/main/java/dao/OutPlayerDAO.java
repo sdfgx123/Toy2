@@ -55,7 +55,8 @@ public class OutPlayerDAO {
 
     public List<OutPlayerRespDTO> getOutPlayers() {
         List<OutPlayerRespDTO> outPlayers = new ArrayList<>();
-        String query = "select p.id, p.name, p.position, o.reason, o.created_at from player_tb p left join out_player_tb o on p.id = o.id order by p.id;";
+        String query = "select p.id, p.name, p.position, o.reason, o.created_at " +
+                "from player_tb p left join out_player_tb o on p.id = o.player_id order by p.id;";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
