@@ -1,5 +1,6 @@
 package dao;
 
+import dto.TeamRespDTO;
 import model.Team;
 
 import java.sql.*;
@@ -15,12 +16,12 @@ public class TeamDAO {
     }
 
     // 팀 등록
-    public void registerTeam(String name) {
+    public void registerTeam(String stadiumId, String name) {
         String query = "insert into team_tb (stadium_id, name) values (?, ?)";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setNull(1, Types.INTEGER);
+            statement.setString(1, stadiumId);
             statement.setString(2, name);
 
             int result = statement.executeUpdate();
@@ -32,23 +33,27 @@ public class TeamDAO {
     }
 
     // 전체 팀 목록
-    public List<Team> getTeamList() {
+    public List<TeamRespDTO> getTeamList() {
 
-        List<Team> teamList = new ArrayList<>();
-        String query = "select * from team_tb";
+        List<TeamRespDTO> teamList = new ArrayList<>();
+        String query = "select team_tb.*, stadium_tb.name as stadium_name, stadium_tb.created_at as stadium_created_at " +
+                "from team_tb " +
+                "left join stadium_tb on team_tb.stadium_id = stadium_tb.id";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                Team team = new Team(
+                TeamRespDTO teamRespDTO = new TeamRespDTO(
                         rs.getInt("id"),
                         rs.getInt("stadium_id"),
                         rs.getString("name"),
-                        rs.getTimestamp("created_at")
+                        rs.getTimestamp("created_at"),
+                        rs.getString("stadium_name"),
+                        rs.getTimestamp("stadium_created_at")
                 );
-                teamList.add(team);
+                teamList.add(teamRespDTO);
             }
             return teamList;
 
