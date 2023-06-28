@@ -10,8 +10,18 @@ import java.util.List;
 
 public class StadiumService {
 
-    static final Connection connetion = DBConnection.getInstance();
-    static final StadiumDAO stadiumDAO = new StadiumDAO(connetion);
+    static final Connection connection = DBConnection.getInstance();
+    static final StadiumDAO stadiumDAO = StadiumDAO.getInstance(connection);
+
+    private static final StadiumService instance = new StadiumService();
+
+    private StadiumService() {
+
+    }
+
+    public static StadiumService getInstance() {
+        return instance;
+    }
 
     public void registerStadium(InputDTO pDTO) {
         String name = pDTO.getParameters().get("name");
@@ -20,9 +30,8 @@ public class StadiumService {
     }
 
     public void getStadiumList() {
-        //stadiumDAO.getStadiumList();
         List<Stadium> stadiumList = stadiumDAO.getStadiumList();
-        System.out.println(stadiumList.toString());
+        System.out.println(stadiumList);
         System.out.println("성공");
     }
 

@@ -8,6 +8,7 @@ public class InputDTO {
     Map<String, String> parameters;
 
     public InputDTO() {
+
     }
 
     public InputDTO(String methodName, Map<String, String> parameters) {
