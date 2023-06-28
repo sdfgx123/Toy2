@@ -8,10 +8,18 @@ import java.util.Date;
 import java.util.List;
 
 public class OutPlayerDAO {
-    private Connection connection;
+    private static OutPlayerDAO outPlayerDAO;
+    private static Connection connection;
 
-    public OutPlayerDAO(Connection connection) {
-        this.connection = connection;
+    private OutPlayerDAO() {
+    }
+
+    public static OutPlayerDAO getInstance(Connection connection) {
+        if (outPlayerDAO == null) {
+            OutPlayerDAO.connection = connection;
+            outPlayerDAO = new OutPlayerDAO();
+        }
+        return outPlayerDAO;
     }
 
     public void registerOutPlayer(int playerId, String reason) {

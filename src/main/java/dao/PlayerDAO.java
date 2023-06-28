@@ -8,10 +8,18 @@ import java.util.List;
 import java.util.Date;
 
 public class PlayerDAO {
-    private Connection connection;
 
-    public PlayerDAO(Connection connection) {
-        this.connection = connection;
+    private static PlayerDAO playerDAO;
+    private static Connection connection;
+
+    private PlayerDAO() {}
+
+    public static PlayerDAO getInstance(Connection connection) {
+        if (playerDAO == null) {
+            PlayerDAO.connection = connection;
+            playerDAO = new PlayerDAO();
+        }
+        return playerDAO;
     }
 
     public void registerPlayer(int teamId, String name, String position) {
