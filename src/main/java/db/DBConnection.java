@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnection {
+    private static Connection connection;
 
+    private DBConnection(){}
     public static Connection getInstance() {
 
         String url = "jdbc:mysql://localhost:3306/baseball";
@@ -13,7 +15,11 @@ public class DBConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
+            if(connection==null){
+                connection= DriverManager.getConnection(url, username, password);
+                System.out.println("debug: created new Connection");
+                return connection;
+            }
             System.out.println("debug : db connection succeed");
             return connection;
 
