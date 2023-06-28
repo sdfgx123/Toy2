@@ -30,9 +30,8 @@ public class StadiumService {
     }
 
     public void getStadiumList() {
-        //stadiumDAO.getStadiumList();
         List<Stadium> stadiumList = stadiumDAO.getStadiumList();
-        System.out.println(stadiumList.toString());
+        System.out.println(stadiumList);
         System.out.println("성공");
     }
 
