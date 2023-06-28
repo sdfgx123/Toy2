@@ -18,8 +18,10 @@ public class BaseBallApp {
 //    static final StadiumDAO stadiumDAO = new StadiumDAO(connection);
 //    static final TeamDAO teamDAO = new TeamDAO(connection);
 
-    static final StadiumService stadiumService = new StadiumService();
+    //static final StadiumService stadiumService = new StadiumService();
     static final TeamService teamService = new TeamService();
+
+    static final StadiumService stadiumService = StadiumService.getInstance();
 
     public static void main(String[] args) {
 //        List<Account> accountList = accountDAO.getAccountList();
