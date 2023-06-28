@@ -7,7 +7,7 @@ public class DBConnection {
 
     public static Connection getInstance() {
 
-        String url = "jdbc:mysql://localhost:3306/metadb";
+        String url = "jdbc:mysql://localhost:3306/baseball";
         String username = "root";
         String password = "password";
 

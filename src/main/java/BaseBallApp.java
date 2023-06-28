@@ -1,6 +1,4 @@
-import dao.AccountDAO;
-import dao.StadiumDAO;
-import dao.TeamDAO;
+import dao.*;
 import db.DBConnection;
 import dto.InputDTO;
 import model.Account;
