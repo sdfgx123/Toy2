@@ -1,5 +1,6 @@
 package dao;
 
+import dto.OutPlayerRespDTO;
 import model.OutPlayer;
 
 import java.sql.*;
@@ -52,17 +53,18 @@ public class OutPlayerDAO {
     }
 
 
-    public List<OutPlayer> getOutPlayers() {
-        List<OutPlayer> outPlayers = new ArrayList<>();
-        String query = "select * from out_player_tb";
+    public List<OutPlayerRespDTO> getOutPlayers() {
+        List<OutPlayerRespDTO> outPlayers = new ArrayList<>();
+        String query = "select p.id, p.name, p.position, o.reason, o.created_at from player_tb p left join out_player_tb o on p.id = o.id order by p.id;";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                OutPlayer outPlayer = new OutPlayer(
+                OutPlayerRespDTO outPlayer = new OutPlayerRespDTO(
                         rs.getInt("id"),
-                        rs.getInt("player_id"),
+                        rs.getString("name"),
+                        rs.getString("position"),
                         rs.getString("reason"),
                         rs.getTimestamp("created_at")
                 );
