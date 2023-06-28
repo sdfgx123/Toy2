@@ -7,6 +7,7 @@ import model.Player;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerService {
     private static PlayerService playerService;
@@ -21,8 +22,12 @@ public class PlayerService {
         return playerService;
     }
 
-    public int registerPlayer(InputDTO pDTO){
-        return 0;
+    public void registerPlayer(InputDTO pDTO){
+        Map<String, String> params = pDTO.getParameters();
+        int teamId = Integer.parseInt(params.get("teamId"));
+        String name = params.get("name");
+        String position = params.get("position");
+        playerDAO.registerPlayer(teamId, name, position);
     }
 
     public void getPlayers(InputDTO pDTO){
