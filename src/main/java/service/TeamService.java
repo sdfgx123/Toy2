@@ -13,6 +13,16 @@ public class TeamService {
     static final Connection connection = DBConnection.getInstance();
     static final TeamDAO teamDAO = new TeamDAO(connection);
 
+    private static final TeamService instance = new TeamService();
+
+    private TeamService() {
+
+    }
+
+    public static TeamService getInstance() {
+        return instance;
+    }
+
     public void registerTeam(InputDTO pDTO) {
         String stadiumId = pDTO.getParameters().get("stadiumId");
         String name = pDTO.getParameters().get("name");

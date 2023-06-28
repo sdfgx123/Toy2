@@ -19,8 +19,9 @@ public class BaseBallApp {
 //    static final TeamDAO teamDAO = new TeamDAO(connection);
 
     //static final StadiumService stadiumService = new StadiumService();
-    static final TeamService teamService = new TeamService();
+    //static final TeamService teamService = new TeamService();
 
+    static final TeamService teamService = TeamService.getInstance();
     static final StadiumService stadiumService = StadiumService.getInstance();
 
     public static void main(String[] args) {
