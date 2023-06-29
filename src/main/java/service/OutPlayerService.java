@@ -3,8 +3,10 @@ package service;
 import dao.OutPlayerDAO;
 import db.DBConnection;
 import dto.InputDTO;
+import dto.OutPlayerRespDTO;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Map;
 
 public class OutPlayerService {
@@ -28,5 +30,11 @@ public class OutPlayerService {
         int playerId = Integer.parseInt(params.get("playerId"));
         String reason = params.get("reason");
         outPlayerDAO.registerOutPlayer(playerId, reason);
+    }
+
+
+    public void getOutPlayers(){
+        List<OutPlayerRespDTO> outPlayers = outPlayerDAO.getOutPlayers();
+        System.out.println(outPlayers);
     }
 }
