@@ -2,10 +2,7 @@ package dao;
 
 import model.Stadium;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +23,7 @@ public class StadiumDAO {
     }
 
     // 야구장 등록
-    public void registerStadium(String name) {
-
+    public boolean registerStadium(String name) {
         String query = "insert into stadium_tb (name) values (?)";
 
         try {

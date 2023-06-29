@@ -16,20 +16,24 @@ public class StadiumService {
     private static final StadiumService instance = new StadiumService();
 
     private StadiumService() {
-
     }
 
-    public static StadiumService getInstance() {
-        return instance;
-    }
+    public static StadiumService getInstance() {return instance;}
 
     public void registerStadium(InputDTO pDTO) {
         String name = pDTO.getParameters().get("name");
-        stadiumDAO.registerStadium(name);
-        //System.out.println("성공");
+        boolean isRegistered = stadiumDAO.registerStadium(name);
+
+        if (! isRegistered) {
+            System.out.println("\n---------------------------------");
+            System.out.println("야구장 등록에 실패했습니다. 재시도 하십시오.");
+            System.out.println("---------------------------------");
+            return;
+        }
+
         System.out.println("\n------------");
         System.out.println("야구장 등록 성공");
-        System.out.println("------------\n");
+        System.out.println("------------");
     }
 
     public void getStadiumList() {
@@ -44,9 +48,6 @@ public class StadiumService {
                     stadium.getName(),
                     stadium.getCreatedAt());
         }
-
-//        System.out.println(stadiumList);
-//        System.out.println("성공");
     }
 
 }

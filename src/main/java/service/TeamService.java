@@ -16,7 +16,6 @@ public class TeamService {
     private static final TeamService instance = new TeamService();
 
     private TeamService() {
-
     }
 
     public static TeamService getInstance() {
@@ -26,10 +25,18 @@ public class TeamService {
     public void registerTeam(InputDTO pDTO) {
         String stadiumId = pDTO.getParameters().get("stadiumId");
         String name = pDTO.getParameters().get("name");
-        teamDAO.registerTeam(stadiumId, name);
+        boolean isRegistered = teamDAO.registerTeam(stadiumId, name);
+
+        if (! isRegistered) {
+            System.out.println("\n-------------------------------");
+            System.out.println("팀 등록에 실패했습니다. 재시도 하십시오.");
+            System.out.println("-------------------------------");
+            return;
+        }
+
         System.out.println("\n--------");
         System.out.println("팀 등록 성공");
-        System.out.println("--------\n");
+        System.out.println("--------");
 
     }
 
