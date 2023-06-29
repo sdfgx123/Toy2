@@ -3,6 +3,7 @@ package service;
 import dao.PlayerDAO;
 import db.DBConnection;
 import dto.InputDTO;
+import dto.PositionRespDTO;
 import model.Player;
 
 import java.sql.Connection;
@@ -15,14 +16,18 @@ public class PlayerService {
     //싱글톤
     private static PlayerDAO playerDAO;
 
+    private PlayerService() {
+        playerDAO = PlayerDAO.getInstance(connection);
+    }
+
     public static PlayerService getInstance() {
-        if(playerService==null){
-            playerService=new PlayerService();
+        if (playerService == null) {
+            playerService = new PlayerService();
         }
         return playerService;
     }
 
-    public void registerPlayer(InputDTO pDTO){
+    public void registerPlayer(InputDTO pDTO) {
         Map<String, String> params = pDTO.getParameters();
         int teamId = Integer.parseInt(params.get("teamId"));
         String name = params.get("name");
@@ -30,9 +35,14 @@ public class PlayerService {
         playerDAO.registerPlayer(teamId, name, position);
     }
 
-    public void getPlayers(InputDTO pDTO){
+    public void getPlayers(InputDTO pDTO) {
         int teamId = Integer.parseInt(pDTO.getParameters().get("teamId"));
         List<Player> players = playerDAO.getPlayers(teamId);
+        System.out.println(players);
+    }
+
+    public void getPlayersOfPosition() {
+        List<PositionRespDTO> players = playerDAO.getPlayersOfPosition();
         System.out.println(players);
     }
 }

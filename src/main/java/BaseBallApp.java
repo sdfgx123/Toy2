@@ -4,6 +4,8 @@ import dto.InputDTO;
 import model.Account;
 import model.Stadium;
 import model.Team;
+import service.OutPlayerService;
+import service.PlayerService;
 import service.StadiumService;
 import service.TeamService;
 
@@ -18,11 +20,11 @@ public class BaseBallApp {
 //    static final StadiumDAO stadiumDAO = new StadiumDAO(connection);
 //    static final TeamDAO teamDAO = new TeamDAO(connection);
 
-    //static final StadiumService stadiumService = new StadiumService();
-    //static final TeamService teamService = new TeamService();
 
     static final TeamService teamService = TeamService.getInstance();
     static final StadiumService stadiumService = StadiumService.getInstance();
+    private static final PlayerService playerService = PlayerService.getInstance();
+    private static final OutPlayerService outPlayerService = OutPlayerService.getInstance();
 
     public static void main(String[] args) {
 //        List<Account> accountList = accountDAO.getAccountList();
@@ -53,10 +55,10 @@ public class BaseBallApp {
         if (methodName.equals("야구장목록")) stadiumService.getStadiumList();
         if (methodName.equals("팀등록")) teamService.registerTeam(pDTO);
         if (methodName.equals("팀목록")) teamService.getTeamList();
-//        if (methodName.equals("선수등록"))
-//        if (methodName.equals("선수목록"))
-//        if (methodName.equals("퇴출등록"))
-//        if (methodName.equals("퇴출목록"))
-//        if (methodName.equals("포지션별목록"))
+        if (methodName.equals("선수등록")) playerService.registerPlayer(pDTO);
+        if (methodName.equals("선수목록")) playerService.getPlayers(pDTO);
+        if (methodName.equals("퇴출등록")) outPlayerService.registerOutPlayer(pDTO);
+        if (methodName.equals("퇴출목록")) outPlayerService.getOutPlayers();
+        if (methodName.equals("포지션별목록")) playerService.getPlayersOfPosition();
     }
 }
