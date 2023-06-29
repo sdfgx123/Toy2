@@ -20,8 +20,8 @@ public class Input {
             try {
                 String str = sc.nextLine();
 
-                if (str.equals("end")) {
-                    throw new InputEndException("end 입력 : 프로그램을 종료합니다.");
+                if (str.equals("end") || str.equals("END")) {
+                    throw new InputEndException("\n--------------------------\nEND 입력 : 프로그램을 종료합니다.\n--------------------------");
                 }
 
                 Matcher matcher = pattern.matcher(str);
