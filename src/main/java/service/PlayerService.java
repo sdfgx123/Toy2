@@ -3,6 +3,7 @@ package service;
 import dao.PlayerDAO;
 import db.DBConnection;
 import dto.InputDTO;
+import dto.PositionRespDTO;
 import model.Player;
 
 import java.sql.Connection;
@@ -37,6 +38,11 @@ public class PlayerService {
     public void getPlayers(InputDTO pDTO) {
         int teamId = Integer.parseInt(pDTO.getParameters().get("teamId"));
         List<Player> players = playerDAO.getPlayers(teamId);
+        System.out.println(players);
+    }
+
+    public void getPlayersOfPosition() {
+        List<PositionRespDTO> players = playerDAO.getPlayersOfPosition();
         System.out.println(players);
     }
 }
