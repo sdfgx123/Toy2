@@ -1,7 +1,6 @@
 import dto.InputDTO;
 import exception.InputEndException;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -31,13 +30,15 @@ public class Input {
                 }
 
                 InputDTO pDTO = parseString(str);
-
                 return pDTO;
             } catch (InputEndException e) {
                 System.out.println(e.getMessage());
                 System.exit(0);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("예기치 않은 문제가 발생했습니다. 다시 시도해 주십시오.");
             }
         }
     }
@@ -47,13 +48,9 @@ public class Input {
         String methodName = parts[0];
         Map<String, String> parameters = new HashMap<>();
 
-        // 파라미터가 존재한다면,
         if (parts.length > 1) {
             parameters = extractParameters(parts[1]);
         }
-
-        System.out.println("확인용 / 메서드 이름 : " + methodName);
-        System.out.println("확인용 / 파라미터 : " + parameters);
 
         return new InputDTO(methodName, parameters);
     }
