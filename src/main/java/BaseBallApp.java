@@ -20,14 +20,17 @@ public class BaseBallApp {
 
         while (true) {
             InputDTO pDTO = Input.makeRequest();
-            callFunction(pDTO);
-            System.out.println("\n-----------------------------------------------------");
-            System.out.println("요청에 대한 처리가 모두 끝났습니다. 기능 요청 콘솔을 다시 출력합니다.");
-            System.out.println("-----------------------------------------------------\n");
+            boolean isSucceeded = callFunction(pDTO);
+
+            if (isSucceeded) {
+                System.out.println("\n-----------------------------------------------------");
+                System.out.println("요청에 대한 처리가 모두 끝났습니다. 기능 요청 콘솔을 다시 출력합니다.");
+                System.out.println("-----------------------------------------------------\n");
+            }
         }
     }
 
-    public static void callFunction(InputDTO pDTO) {
+    public static boolean callFunction(InputDTO pDTO) {
         String methodName = pDTO.getMethodName();
 
         try {
@@ -42,10 +45,12 @@ public class BaseBallApp {
             if (methodName.equals("퇴출목록")) outPlayerService.getOutPlayers();
             if (methodName.equals("포지션별목록")) playerService.getPlayersOfPosition();
 
+            return true;
         } catch (IllegalArgumentException e) {
             System.out.println("\n-----------------------------------------------------");
             System.out.println("요청하신 기능은 없는 기능이거나 잘못된 기능입니다. 다시 시도하십시오.");
             System.out.println("-----------------------------------------------------");
+            return false;
         }
     }
 
