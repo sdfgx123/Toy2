@@ -1,5 +1,6 @@
 package dao;
 
+import dto.PositionRespDTO;
 import model.Player;
 
 import java.sql.*;
@@ -8,10 +9,19 @@ import java.util.List;
 import java.util.Date;
 
 public class PlayerDAO {
-    private Connection connection;
 
-    public PlayerDAO(Connection connection) {
-        this.connection = connection;
+    private static PlayerDAO playerDAO;
+    private static Connection connection;
+
+    private PlayerDAO() {
+    }
+
+    public static PlayerDAO getInstance(Connection connection) {
+        if (playerDAO == null) {
+            PlayerDAO.connection = connection;
+            playerDAO = new PlayerDAO();
+        }
+        return playerDAO;
     }
 
     public void registerPlayer(int teamId, String name, String position) {
@@ -54,4 +64,37 @@ public class PlayerDAO {
         }
         return null;
     }
+
+    public List<PositionRespDTO> getPlayersOfPosition() {
+        List<PositionRespDTO> players = new ArrayList<>();
+        String query = "select \n" +
+                "p.position as '포지션'," +
+                "max(case when t.name='두산' then p.name end) as '두산'," +
+                "max(case when t.name='넥센' then p.name end) as '넥센'," +
+                "max(case when t.name='NC' then p.name end) as 'NC'," +
+                "max(case when t.name='기아' then p.name end) as '기아'," +
+                "max(case when t.name='SK' then p.name end) as 'SK'" +
+                "from team_tb t inner join player_tb p on t.id = p.team_id where p.position='1루수' or p.position='2루수'" +
+                "group by p.position;";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                PositionRespDTO positionRespDTO = new PositionRespDTO(
+                        rs.getString("포지션"),
+                        rs.getString("두산"),
+                        rs.getString("넥센"),
+                        rs.getString("NC"),
+                        rs.getString("기아"),
+                        rs.getString("SK")
+                );
+                players.add(positionRespDTO);
+            }
+            return players;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
