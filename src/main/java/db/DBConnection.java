@@ -17,10 +17,8 @@ public class DBConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             if(connection==null){
                 connection= DriverManager.getConnection(url, username, password);
-                System.out.println("debug: created new Connection");
                 return connection;
             }
-            System.out.println("debug : db connection succeed");
             return connection;
 
         } catch (Exception e) {

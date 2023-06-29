@@ -1,44 +1,22 @@
-import dao.*;
-import db.DBConnection;
 import dto.InputDTO;
-import model.Account;
-import model.Stadium;
-import model.Team;
+
 import service.OutPlayerService;
 import service.PlayerService;
 import service.StadiumService;
 import service.TeamService;
 
-import java.sql.Connection;
-import java.util.List;
-import java.util.Scanner;
-
 public class BaseBallApp {
 
-//    static final Connection connection = DBConnection.getInstance();
-//    static final AccountDAO accountDAO = new AccountDAO(connection);
-//    static final StadiumDAO stadiumDAO = new StadiumDAO(connection);
-//    static final TeamDAO teamDAO = new TeamDAO(connection);
-
-
-    static final TeamService teamService = TeamService.getInstance();
-    static final StadiumService stadiumService = StadiumService.getInstance();
+    private static final TeamService teamService = TeamService.getInstance();
+    private static final StadiumService stadiumService = StadiumService.getInstance();
     private static final PlayerService playerService = PlayerService.getInstance();
     private static final OutPlayerService outPlayerService = OutPlayerService.getInstance();
 
     public static void main(String[] args) {
-//        List<Account> accountList = accountDAO.getAccountList();
-////        System.out.println(accountList.toString());
-////
-////        List<Stadium> stadiumList = stadiumDAO.getStadiumList();
-////        System.out.println(stadiumList.toString());
-////
-////        List<Team> teamList = teamDAO.getTeamList();
-////        System.out.println(teamList.toString());
 
-//        System.out.println("-----registerStadium-----");
-//        stadiumDAO.registerStadium("test-001");
-//        System.out.println(stadiumList.toString());
+        System.out.println("-----------------------------------------------------");
+        System.out.println();
+
 
         while (true) {
             InputDTO pDTO = Input.makeRequest();

@@ -31,4 +31,28 @@ public class TeamRespDTO {
                 ", stadiumCreatedAt=" + stadiumCreatedAt +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getStadiumId() {
+        return stadiumId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getStadiumName() {
+        return stadiumName;
+    }
+
+    public Timestamp getStadiumCreatedAt() {
+        return stadiumCreatedAt;
+    }
 }
