@@ -20,11 +20,11 @@ public class BaseBallApp {
 //    static final StadiumDAO stadiumDAO = new StadiumDAO(connection);
 //    static final TeamDAO teamDAO = new TeamDAO(connection);
 
-    private static final StadiumService stadiumService = new StadiumService();
-    private static final TeamService teamService = new TeamService();
+
+    static final TeamService teamService = TeamService.getInstance();
+    static final StadiumService stadiumService = StadiumService.getInstance();
     private static final PlayerService playerService = PlayerService.getInstance();
     private static final OutPlayerService outPlayerService = OutPlayerService.getInstance();
-
 
     public static void main(String[] args) {
 //        List<Account> accountList = accountDAO.getAccountList();
@@ -40,9 +40,13 @@ public class BaseBallApp {
 //        stadiumDAO.registerStadium("test-001");
 //        System.out.println(stadiumList.toString());
 
-        InputDTO pDTO = Input.makeRequest();
-        callFunction(pDTO);
-
+        while (true) {
+            InputDTO pDTO = Input.makeRequest();
+            callFunction(pDTO);
+            System.out.println("\n-----------------------------------------------------");
+            System.out.println("요청에 대한 처리가 모두 끝났습니다. 기능 요청 콘솔을 다시 출력합니다.");
+            System.out.println("-----------------------------------------------------\n");
+        }
     }
 
     public static void callFunction(InputDTO pDTO) {
