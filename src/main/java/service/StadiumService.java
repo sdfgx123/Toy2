@@ -26,7 +26,10 @@ public class StadiumService {
     public void registerStadium(InputDTO pDTO) {
         String name = pDTO.getParameters().get("name");
         stadiumDAO.registerStadium(name);
-        System.out.println("성공");
+        //System.out.println("성공");
+        System.out.println("\n------------");
+        System.out.println("야구장 등록 성공");
+        System.out.println("------------\n");
     }
 
     public void getStadiumList() {
