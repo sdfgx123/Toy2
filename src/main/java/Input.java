@@ -25,6 +25,7 @@ public class Input {
                 }
 
                 Matcher matcher = pattern.matcher(str);
+
                 if (!matcher.matches()) {
                     throw new IllegalArgumentException("잘못된 형식입니다. 다시 입력하십시오.");
                 }
