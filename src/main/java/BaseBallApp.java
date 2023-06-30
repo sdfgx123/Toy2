@@ -20,23 +20,53 @@ public class BaseBallApp {
 
         while (true) {
             InputDTO pDTO = Input.makeRequest();
-            callFunction(pDTO);
-            System.out.println("\n-----------------------------------------------------");
-            System.out.println("요청에 대한 처리가 모두 끝났습니다. 기능 요청 콘솔을 다시 출력합니다.");
-            System.out.println("-----------------------------------------------------\n");
+            boolean isSucceeded = callFunction(pDTO);
+
+            if (isSucceeded) {
+                System.out.println("\n-----------------------------------------------------");
+                System.out.println("요청에 대한 처리가 모두 끝났습니다. 기능 요청 콘솔을 다시 출력합니다.");
+                System.out.println("-----------------------------------------------------\n");
+            }
         }
     }
 
-    public static void callFunction(InputDTO pDTO) {
+    public static boolean callFunction(InputDTO pDTO) {
         String methodName = pDTO.getMethodName();
-        if (methodName.equals("야구장등록")) stadiumService.registerStadium(pDTO);
-        if (methodName.equals("야구장목록")) stadiumService.getStadiumList();
-        if (methodName.equals("팀등록")) teamService.registerTeam(pDTO);
-        if (methodName.equals("팀목록")) teamService.getTeamList();
-        if (methodName.equals("선수등록")) playerService.registerPlayer(pDTO);
-        if (methodName.equals("선수목록")) playerService.getPlayers(pDTO);
-        if (methodName.equals("퇴출등록")) outPlayerService.registerOutPlayer(pDTO);
-        if (methodName.equals("퇴출목록")) outPlayerService.getOutPlayers();
-        if (methodName.equals("포지션별목록")) playerService.getPlayersOfPosition();
+
+        try {
+            checkMethodNameValidation(methodName);
+            if (methodName.equals("야구장등록")) stadiumService.registerStadium(pDTO);
+            if (methodName.equals("야구장목록")) stadiumService.getStadiumList();
+            if (methodName.equals("팀등록")) teamService.registerTeam(pDTO);
+            if (methodName.equals("팀목록")) teamService.getTeamList();
+            if (methodName.equals("선수등록")) playerService.registerPlayer(pDTO);
+            if (methodName.equals("선수목록")) playerService.getPlayers(pDTO);
+            if (methodName.equals("퇴출등록")) outPlayerService.registerOutPlayer(pDTO);
+            if (methodName.equals("퇴출목록")) outPlayerService.getOutPlayers();
+            if (methodName.equals("포지션별목록")) playerService.getPlayersOfPosition();
+
+            return true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n-----------------------------------------------------");
+            System.out.println("요청하신 기능은 없는 기능이거나 잘못된 기능입니다. 다시 시도하십시오.");
+            System.out.println("-----------------------------------------------------");
+            return false;
+        }
+    }
+
+    public static void checkMethodNameValidation(String methodName) {
+        String[] functions = {"야구장등록", "야구장목록", "팀등록", "팀목록", "선수등록", "선수목록", "퇴출등록", "퇴출목록", "포지션별목록"};
+        boolean isValid = false;
+
+        for (String function : functions) {
+            if (function.equals(methodName)) {
+                isValid = true;
+                break;
+            }
+        }
+
+        if (! isValid) {
+            throw new IllegalArgumentException();
+        }
     }
 }
